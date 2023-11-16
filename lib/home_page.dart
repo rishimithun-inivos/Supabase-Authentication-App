@@ -9,13 +9,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final notesStream = Supabase.instance.client.from('notes').stream(
+    primaryKey: ['id'],
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Notes'),
       ),
-      body: Container(),
+      body: StreamBuilder<List<Map<String, dynamic>>>(
+        stream: notesStream,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final notes = snapshot.data!;
+
+          return ListView.builder(
+            itemCount: notes.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(
+                  notes[index]['body'],
+                ),
+              );
+            },
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
