@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'home_page.dart';
+import 'database_sample/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,9 +8,12 @@ void main() async {
     url: 'https://fpjqdlxdxsxbhyezyaur.supabase.co',
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZwanFkbHhkeHN4Ymh5ZXp5YXVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAxMDQ0NDAsImV4cCI6MjAxNTY4MDQ0MH0.8ULcSwrE0TomXzVNbFAn1qeZ610256atdLeah58A2jc',
+    authFlowType: AuthFlowType.pkce,
   );
   runApp(MyApp());
 }
+
+final supabase = Supabase.instance.client;
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
