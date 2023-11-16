@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_authentication_trial/pages/account_screen.dart';
+import 'package:supabase_authentication_trial/pages/login_screen.dart';
+import 'package:supabase_authentication_trial/pages/splash_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'database_sample/home_page.dart';
 
@@ -22,7 +25,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SplashScreen(),
+        '/login': (context) => LoginScreen(),
+        '/account': (context) => AccountScreen(),
+      },
     );
   }
 }
